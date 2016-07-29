@@ -1,0 +1,19 @@
+import pandas as pd
+star_wars = pd.read_csv("star_wars.csv", encoding="ISO-8859-1")
+print(star_wars.head(10))
+star_wars.dropna(axis=0, how='any', thresh=None, subset=['RespondentID'], inplace=True)
+print(star_wars.head(10))
+yes_no = {
+    "Yes": True,
+    "No": False}
+star_wars['Have you seen any of the 6 films in the Star Wars franchise?'] = star_wars['Have you seen any of the 6 films in the Star Wars franchise?'].map(yes_no)
+star_wars['Do you consider yourself to be a fan of the Star Wars film franchise?'] = star_wars['Have you seen any of the 6 films in the Star Wars franchise?'].map(yes_no)
+
+#
+
+work = star_wars.iloc[:,3:9]
+
+#
+work = work.notnull()
+print(work)
+star_wars.iloc[:,3:9] = work
